@@ -1,8 +1,15 @@
 import React from 'react';
-import Typed from 'react-typed';
+import {useTypewriter, Cursor} from 'react-simple-typewriter';
 import Naresh from "../naresh.jpeg"
 
 const Hero = () => {
+  const [text] = useTypewriter({
+    words: ['buildings', 'sunsets', 'city scapes', 'portraits', 'nature', 'night skies'],
+    loop: true,
+    typeSpeed: 120,
+    deleteSpeed: 80,
+  })
+
   return (
     <div className='flex overflow-hidden'>
       <div className='w-1/2 h-screen flex flex-col justify-center items-center'>
@@ -11,7 +18,14 @@ const Hero = () => {
         <div className='mt-4 rounded-full border-2 border-black'>
             <button className='p-6 '>
             <p className='md:text-4xl sm:text-2xl text-xl font-bold p-1'>View my work in</p>
-            <Typed className='md:text-4xl sm:text-2xl text-xl font-bold' strings={['buildings', 'sunsets', 'city scapes', 'potraits', 'nature', 'night skies' ]} typeSpeed={120} backSpeed = {140} loop />
+             <span className = "md:text-4xl sm:text-2xl text-xl font-bold p-1">
+             {text}
+             <Cursor/>
+             </span> 
+            
+              
+            
+      
             </button>
         </div>
         
