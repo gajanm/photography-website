@@ -1,20 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import '../index.css'
 import {AiOutlineClose, AiOutlineMenu} from "react-icons/ai"
+import { Link } from "react-router-dom"
 
 const Navbar = () => {
-  const [nav, setNav] = useState(false)
+  const [nav, setNav] = useState(true)
 
   const handleNav = () => {
     setNav(!nav)
+
   }   
+
   return (
-    <div className='flex fixed justify-between items-center h-24 w-[100%] mx-auto px-16 text-black'>
-        <h1 className='p-4 w-[75%] text-3xl font-bold text-black'>Naresh Photography</h1>
+    <div className='z-10 flex fixed justify-between items-center h-24 w-[100%] mx-auto px-16 text-white #333333'>
+        <h1 className='p-4 w-[75%] text-3xl font-bold text-white'>Naresh Photography</h1>
         <ul className = 'hidden md:flex '>
-          <li className='p-4'>Home</li>
-          <li className='p-4'>Portfolio</li>
-          <li className='p-4'>Contact</li>
+          <li className='p-4'><Link to='/'> Home </Link></li>
+          <li className='p-4'><Link to='/portfolio'>Portfolio</Link></li>
+          <li className='p-4'><Link to='/contact'>Contact</Link></li>
         </ul>
         <div onClick={handleNav} className='block md:hidden' >
             {!nav ? <AiOutlineClose size={30} /> : <AiOutlineMenu size={30} /> }
