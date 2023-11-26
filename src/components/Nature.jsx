@@ -1,5 +1,5 @@
 import React from 'react'
-import '../components/buildings.css'
+import '../components/nature.css'
 import Img1 from '../components/Images/nature/image1.JPG';
 import Img2 from './Images/nature/image2.JPG';
 import Img3 from './Images/nature/image3.JPG';
