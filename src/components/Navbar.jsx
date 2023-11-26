@@ -12,14 +12,14 @@ const Navbar = () => {
   }   
 
   return (
-    <div className='z-10 flex fixed justify-between items-center h-24 w-[100%] mx-auto px-16 text-white bg-[#333333] '>
+    <div className='z-10 flex fixed justify-between items-center h-24 w-[100%] mx-auto px-12 text-white bg-[#333333] '>
         <h1 className='p-4 w-[75%] text-2xl md:text-3xl font-bold text-white'>Naresh Photography</h1>
         <ul className = 'hidden md:flex '>
           <li className='p-4'><Link to='/'> Home </Link></li>
           <li className='p-4'><Link to='/portfolio'>Portfolio</Link></li>
           <li className='p-4'><Link to='/contact'>Contact</Link></li>
         </ul>
-        <div onClick={handleNav} className='block md:hidden md:pl-0 pl-8' >
+        <div onClick={handleNav} className='block md:hidden   ' >
             {!nav ? <AiOutlineClose size={30} /> : <AiOutlineMenu size={30} /> }
           
         </div>
