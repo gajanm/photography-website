@@ -38,7 +38,6 @@ const Contact = () => {
       <div className="w-full md:w-1/2 md:h-screen flex flex-col justify-center items-center mb-16 pt-28 md:mb-0 md:pt-0">
         <h1 className="text-xl md:text-3xl font-bold px-8 mb-1 text-center"> Contact me if you are interested in buying a print or booking me for an event</h1>
         <h1 className='text-lg sm:text-xl md:text-2xl py-3'>Email: nareshsanjayphoto@gmail.com </h1>
-        <h1 className='text-lg sm:text-xl md:text-2xl py-3'>Phone #: 732-647-8354 </h1>
         <h1 className='text-lg sm:text-xl md:text-2xl'>Freehold, NJ</h1>
 
       </div>
