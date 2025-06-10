@@ -1,38 +1,95 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import '../index.css'
 import {AiOutlineClose, AiOutlineMenu} from "react-icons/ai"
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 
 const Navbar = () => {
-  const [nav, setNav] = useState(true)
+  const [nav, setNav] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleNav = () => {
-    setNav(!nav)
+    setNav(!nav);
+  };
 
-  }   
+  const navLinks = [
+    { path: '/', label: 'Home' },
+    { path: '/portfolio', label: 'Portfolio' },
+    { path: '/contact', label: 'Contact' },
+  ];
 
   return (
-    <div className='z-10 flex fixed justify-between items-center h-24 w-[100%] mx-auto px-8 text-white bg-[#333333] '>
-        <h1 className='p-4 w-[75%] text-2xl md:text-3xl font-bold text-white'>Nareshsanjayphoto</h1>
-        <ul className = 'hidden md:flex '>
-          <li className='p-4'><Link to='/'> Home </Link></li>
-          <li className='p-4'><Link to='/portfolio'>Portfolio</Link></li>
-          <li className='p-4'><Link to='/contact'>Contact</Link></li>
-        </ul>
-        <div onClick={handleNav} className='block md:hidden   ' >
-            {!nav ? <AiOutlineClose size={30} /> : <AiOutlineMenu size={30} /> }
-          
-        </div>
-        <div className={!nav ? 'fixed left-0 top-0 w-[80%] h-full border-r border-r-gray-900 bg-[#000000] ease-in-out duration-500' : 'fixed left-[-100%] ease-in-out duration-500'}>
-          <h1 className='h-24 items-center justify-between px-16 p-4 w-[100%] text-xl font-bold text-[#ffffff]'>Nareshsanjayphoto</h1>
-          <ul className='uppercase pl-16 mt-16 text-white  '>
-            <li className='p-4 '><Link to='/'> Home </Link></li>
-            <li className='p-4'><Link to='/portfolio'>Portfolio</Link></li>
-            <li className='p-4'><Link to='/contact'>Contact</Link></li>
-          </ul>
-        </div>
-    </div>
-  )
-}
+    <div className={`fixed w-full z-50 transition-all duration-300 ${
+      scrolled ? 'bg-photo-black/90 backdrop-blur-md' : 'bg-transparent'
+    }`}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-20">
+          <Link to="/" className="flex items-center">
+            <h1 className="text-2xl md:text-3xl font-playfair font-bold text-white hover:text-photo-gold-300 transition-colors duration-300">
+              Nareshsanjayphoto
+            </h1>
+          </Link>
 
-export default Navbar
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex space-x-8">
+            {navLinks.map((link) => (
+              <Link
+                key={link.path}
+                to={link.path}
+                className={`font-inter text-sm tracking-wide transition-colors duration-300 ${
+                  location.pathname === link.path
+                    ? 'text-photo-gold-300 font-medium'
+                    : 'text-white hover:text-photo-gold-200'
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={handleNav}
+            className="md:hidden text-white hover:text-photo-gold-300 transition-colors duration-300"
+          >
+            {nav ? <AiOutlineClose size={24} /> : <AiOutlineMenu size={24} />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Navigation */}
+      <div
+        className={`md:hidden fixed inset-y-0 right-0 transform ${
+          nav ? 'translate-x-0' : 'translate-x-full'
+        } w-64 bg-photo-black/95 backdrop-blur-lg transition-transform duration-300 ease-in-out z-50`}
+      >
+        <div className="flex flex-col h-full pt-20 px-6">
+          {navLinks.map((link) => (
+            <Link
+              key={link.path}
+              to={link.path}
+              onClick={() => setNav(false)}
+              className={`py-4 font-inter text-base transition-colors duration-300 ${
+                location.pathname === link.path
+                  ? 'text-photo-gold-300 font-medium'
+                  : 'text-white hover:text-photo-gold-200'
+              }`}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Navbar;
