@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTypewriter, Cursor } from 'react-simple-typewriter';
-import Naresh from "../naresh.jpeg";
+import Naresh from "../naresh.jpg";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
